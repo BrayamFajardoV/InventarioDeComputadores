@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MantenimientoDeEquipos.Models.Dto.Mantenimiento>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>lista de mantenimientos</h2>
+
+<p>
+    @Html.ActionLink("Agregar nuevo computador", "Create", " ", new { @class="btn btn-success"})
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th hidden="hidden">
+            @Html.DisplayNameFor(model => model.Id_Mantenimiento)
+        </th >
+        <th  hidden="hidden">
+            @Html.DisplayNameFor(model => model.Id_Computador)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UltimoMantenimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProximoMantenimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreComputador)
+        </th>
+        <th>Acciones</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td hidden="hidden">
+            @Html.DisplayFor(modelItem => item.Id_Mantenimiento)
+        </td>
+        <td hidden="hidden">
+            @Html.DisplayFor(modelItem => item.Id_Computador)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UltimoMantenimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProximoMantenimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Observaciones)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreComputador)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", "", new { /* id=item.PrimaryKey */ @class="btn btn-info" }) 
+            @Html.ActionLink("Eliminar", "Delete", " " , new { /* id=item.PrimaryKey */  @class = "btn btn-warning" })
+        </td>
+    </tr>
+}
+
+</table>

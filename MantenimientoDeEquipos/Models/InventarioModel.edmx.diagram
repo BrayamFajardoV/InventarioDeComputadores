@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a950990ad657458b8481ea376017fe69" Name="Diagram1">
+        <EntityTypeShape EntityType="InventarioComputadoresModel.Computador" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventarioComputadoresModel.Funcionario" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventarioComputadoresModel.Mantenimiento" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventarioComputadoresModel.TipoComputador" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="InventarioComputadoresModel.FK_Computador_Funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="InventarioComputadoresModel.FK_Computador_TipoComputador" ManuallyRouted="false" />
+        <AssociationConnector Association="InventarioComputadoresModel.FK_Mantenimiento_Computador" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

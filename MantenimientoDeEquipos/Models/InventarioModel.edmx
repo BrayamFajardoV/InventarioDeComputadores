@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InventarioComputadoresModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Computador">
+          <Key>
+            <PropertyRef Name="Id_Computador" />
+          </Key>
+          <Property Name="Id_Computador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Serial" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id_Funcionario" Type="int" Nullable="false" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Marca" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Id_Tipo_Computador" Type="int" Nullable="false" />
+          <Property Name="Modelo" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Procesador" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Memoria_Ram" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Disco_Duro" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sistema_Operativo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Funcionario">
+          <Key>
+            <PropertyRef Name="Id_Funcionario" />
+          </Key>
+          <Property Name="Id_Funcionario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCompleto" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mantenimiento">
+          <Key>
+            <PropertyRef Name="Id_Mantenimiento" />
+          </Key>
+          <Property Name="Id_Mantenimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Computador" Type="int" Nullable="false" />
+          <Property Name="UltimoMantenimiento" Type="date" Nullable="false" />
+          <Property Name="ProximoMantenimiento" Type="date" Nullable="false" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoComputador">
+          <Key>
+            <PropertyRef Name="Id_Tipo_Computador" />
+          </Key>
+          <Property Name="Id_Tipo_Computador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoComputador" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Computador_Funcionario">
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+          <End Role="Computador" Type="Self.Computador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario">
+              <PropertyRef Name="Id_Funcionario" />
+            </Principal>
+            <Dependent Role="Computador">
+              <PropertyRef Name="Id_Funcionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computador_TipoComputador">
+          <End Role="TipoComputador" Type="Self.TipoComputador" Multiplicity="1" />
+          <End Role="Computador" Type="Self.Computador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoComputador">
+              <PropertyRef Name="Id_Tipo_Computador" />
+            </Principal>
+            <Dependent Role="Computador">
+              <PropertyRef Name="Id_Tipo_Computador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mantenimiento_Computador">
+          <End Role="Computador" Type="Self.Computador" Multiplicity="1" />
+          <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computador">
+              <PropertyRef Name="Id_Computador" />
+            </Principal>
+            <Dependent Role="Mantenimiento">
+              <PropertyRef Name="Id_Computador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventarioComputadoresModelStoreContainer">
+          <EntitySet Name="Computador" EntityType="Self.Computador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Funcionario" EntityType="Self.Funcionario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mantenimiento" EntityType="Self.Mantenimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoComputador" EntityType="Self.TipoComputador" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Computador_Funcionario" Association="Self.FK_Computador_Funcionario">
+            <End Role="Funcionario" EntitySet="Funcionario" />
+            <End Role="Computador" EntitySet="Computador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computador_TipoComputador" Association="Self.FK_Computador_TipoComputador">
+            <End Role="TipoComputador" EntitySet="TipoComputador" />
+            <End Role="Computador" EntitySet="Computador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mantenimiento_Computador" Association="Self.FK_Mantenimiento_Computador">
+            <End Role="Computador" EntitySet="Computador" />
+            <End Role="Mantenimiento" EntitySet="Mantenimiento" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventarioComputadoresModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Computador">
+          <Key>
+            <PropertyRef Name="Id_Computador" />
+          </Key>
+          <Property Name="Id_Computador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Serial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_Funcionario" Type="Int32" Nullable="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Marca" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_Tipo_Computador" Type="Int32" Nullable="false" />
+          <Property Name="Modelo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Procesador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Memoria_Ram" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Disco_Duro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sistema_Operativo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Funcionario" Relationship="Self.FK_Computador_Funcionario" FromRole="Computador" ToRole="Funcionario" />
+          <NavigationProperty Name="TipoComputador" Relationship="Self.FK_Computador_TipoComputador" FromRole="Computador" ToRole="TipoComputador" />
+          <NavigationProperty Name="Mantenimiento" Relationship="Self.FK_Mantenimiento_Computador" FromRole="Computador" ToRole="Mantenimiento" />
+        </EntityType>
+        <EntityType Name="Funcionario">
+          <Key>
+            <PropertyRef Name="Id_Funcionario" />
+          </Key>
+          <Property Name="Id_Funcionario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCompleto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Computador" Relationship="Self.FK_Computador_Funcionario" FromRole="Funcionario" ToRole="Computador" />
+        </EntityType>
+        <EntityType Name="Mantenimiento">
+          <Key>
+            <PropertyRef Name="Id_Mantenimiento" />
+          </Key>
+          <Property Name="Id_Mantenimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Computador" Type="Int32" Nullable="false" />
+          <Property Name="UltimoMantenimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ProximoMantenimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Observaciones" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Computador" Relationship="Self.FK_Mantenimiento_Computador" FromRole="Mantenimiento" ToRole="Computador" />
+        </EntityType>
+        <EntityType Name="TipoComputador">
+          <Key>
+            <PropertyRef Name="Id_Tipo_Computador" />
+          </Key>
+          <Property Name="Id_Tipo_Computador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoComputador1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Computador" Relationship="Self.FK_Computador_TipoComputador" FromRole="TipoComputador" ToRole="Computador" />
+        </EntityType>
+        <Association Name="FK_Computador_Funcionario">
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+          <End Role="Computador" Type="Self.Computador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario">
+              <PropertyRef Name="Id_Funcionario" />
+            </Principal>
+            <Dependent Role="Computador">
+              <PropertyRef Name="Id_Funcionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computador_TipoComputador">
+          <End Role="TipoComputador" Type="Self.TipoComputador" Multiplicity="1" />
+          <End Role="Computador" Type="Self.Computador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoComputador">
+              <PropertyRef Name="Id_Tipo_Computador" />
+            </Principal>
+            <Dependent Role="Computador">
+              <PropertyRef Name="Id_Tipo_Computador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mantenimiento_Computador">
+          <End Role="Computador" Type="Self.Computador" Multiplicity="1" />
+          <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computador">
+              <PropertyRef Name="Id_Computador" />
+            </Principal>
+            <Dependent Role="Mantenimiento">
+              <PropertyRef Name="Id_Computador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventarioContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Computador" EntityType="Self.Computador" />
+          <EntitySet Name="Funcionario" EntityType="Self.Funcionario" />
+          <EntitySet Name="Mantenimiento" EntityType="Self.Mantenimiento" />
+          <EntitySet Name="TipoComputador" EntityType="Self.TipoComputador" />
+          <AssociationSet Name="FK_Computador_Funcionario" Association="Self.FK_Computador_Funcionario">
+            <End Role="Funcionario" EntitySet="Funcionario" />
+            <End Role="Computador" EntitySet="Computador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computador_TipoComputador" Association="Self.FK_Computador_TipoComputador">
+            <End Role="TipoComputador" EntitySet="TipoComputador" />
+            <End Role="Computador" EntitySet="Computador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mantenimiento_Computador" Association="Self.FK_Mantenimiento_Computador">
+            <End Role="Computador" EntitySet="Computador" />
+            <End Role="Mantenimiento" EntitySet="Mantenimiento" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventarioComputadoresModelStoreContainer" CdmEntityContainer="InventarioContext">
+          <EntitySetMapping Name="Computador">
+            <EntityTypeMapping TypeName="InventarioComputadoresModel.Computador">
+              <MappingFragment StoreEntitySet="Computador">
+                <ScalarProperty Name="Id_Computador" ColumnName="Id_Computador" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="Id_Funcionario" ColumnName="Id_Funcionario" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Id_Tipo_Computador" ColumnName="Id_Tipo_Computador" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Procesador" ColumnName="Procesador" />
+                <ScalarProperty Name="Memoria_Ram" ColumnName="Memoria_Ram" />
+                <ScalarProperty Name="Disco_Duro" ColumnName="Disco_Duro" />
+                <ScalarProperty Name="Sistema_Operativo" ColumnName="Sistema_Operativo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Funcionario">
+            <EntityTypeMapping TypeName="InventarioComputadoresModel.Funcionario">
+              <MappingFragment StoreEntitySet="Funcionario">
+                <ScalarProperty Name="Id_Funcionario" ColumnName="Id_Funcionario" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mantenimiento">
+            <EntityTypeMapping TypeName="InventarioComputadoresModel.Mantenimiento">
+              <MappingFragment StoreEntitySet="Mantenimiento">
+                <ScalarProperty Name="Id_Mantenimiento" ColumnName="Id_Mantenimiento" />
+                <ScalarProperty Name="Id_Computador" ColumnName="Id_Computador" />
+                <ScalarProperty Name="UltimoMantenimiento" ColumnName="UltimoMantenimiento" />
+                <ScalarProperty Name="ProximoMantenimiento" ColumnName="ProximoMantenimiento" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoComputador">
+            <EntityTypeMapping TypeName="InventarioComputadoresModel.TipoComputador">
+              <MappingFragment StoreEntitySet="TipoComputador">
+                <ScalarProperty Name="Id_Tipo_Computador" ColumnName="Id_Tipo_Computador" />
+                <ScalarProperty Name="TipoComputador1" ColumnName="TipoComputador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,109 @@
+﻿@model IEnumerable<MantenimientoDeEquipos.Models.Dto.Computador>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de computadores</h2>
+
+@Html.ActionLink("Agregar Computador", "Create", " " , new {@Class ="btn btn-success" })
+
+<table class="table table-bordered">
+    <tr>
+        <th hidden="hidden">
+            @Html.DisplayNameFor(model => model.Id_Computador)
+        </th>
+        <th hidden="hidden">
+            @Html.DisplayNameFor(model => model.Id_Funcionario)
+        </th>
+        <th hidden="hidden">
+            @Html.DisplayNameFor(model => model.Id_TipoComputador)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Serial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ciudad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Marca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Procesador)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemoriaRam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiscoDuro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SistemaOperativo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombreFuncionario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoComputador)
+        </th>
+        <th>Acciones</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td hidden="hidden">
+            @Html.DisplayFor(modelItem => item.Id_Computador)
+        </td>
+        <td hidden="hidden">
+            @Html.DisplayFor(modelItem => item.Id_Funcionario)
+        </td >
+        <td hidden="hidden">
+            @Html.DisplayFor(modelItem => item.Id_TipoComputador)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Serial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ciudad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Marca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modelo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Procesador)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemoriaRam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiscoDuro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SistemaOperativo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombreFuncionario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoComputador)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", " ", new { /* id=item.PrimaryKey */ @class="btn btn-info" })
+            @Html.ActionLink("Eliminar", "Delete"," ", new { /* id=item.PrimaryKey */ @class = "btn btn-primary" })
+        </td>
+    </tr>
+}
+
+</table>
